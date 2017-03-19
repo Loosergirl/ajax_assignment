@@ -1,0 +1,43 @@
+===ATT GÖRA===
+* Göra klart det sista på det gamla movie database-
+  arbetet.
+* Välja API(:er)
+* Mål med vad du ska bygga: Lista med funktionalitet,
+  utseende
+* Faktisk kod (duh)
+* Filtrering & styrning av vad som hämtas.
+* Loading-indikator för när data laddas in.
+* CSS & Responsivitet (Bootstrap)
+* Strukturera kod
+* Felhantering
+* GitHub readme
+* Presentation: Demo av applikation, förklara
+
+===TIDSPLAN===
+16/3: Planering, förarbete, välja API(:er)
+17/3: 
+18/3: Här måste jag börja koda, senast
+19/3
+20/3
+21/3
+22/3
+23/3
+24/3
+25/3
+26/3
+27/3: Strukturera kod, GitHub readme
+28/3: Buffer
+29/3: Senaste dag att göra presentation
+30/3: Presentation
+31/3: Sista inlämning
+
+===LÄNKAR===
+https://github.com/FEND16/javascript2/blob/master/assignment_ajax.md
+
+https://github.com/toddmotto/public-apis
+
+https://github.com/abhishekbanthia/Public-APIs
+
+https://www.programmableweb.com/category/all/apis
+
+http://apikatalogen.se/
