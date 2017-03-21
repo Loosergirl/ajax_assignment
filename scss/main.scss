@@ -1,4 +1,6 @@
+@import 'bootstrap/bootstrap';
 @import 'fonts';
+@import 'nav';
 html {
     height: 100%;
 }
@@ -6,8 +8,37 @@ html {
 body {
     height: 100%;
     margin: 0;
-    background-color: white;
+    background-color: #333333;
     font-size: 1rem;
     line-height: 1.5;
     font-family: 'Open Sans', 'Arial', sans-serif;
+    color: #FFFFFF;
 }
+
+
+/*COLORS*/
+
+
+/*
+#FFFFFF
+#333333
+#40e0d0
+
+Grå:
+#4C5760 & 93A8AC
+
+Grå & lavendel:
+#738290 & A1B5D8
+
+Marinblå &'marinlila':
+#22223B & #4A4E69
+
+Blått:
+#114B5F & #456990
+
+Blått:
+#052F5F & #005377
+
+Grön/blå/svar & blått:
+#1F363D & #40798C
+*/

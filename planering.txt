@@ -41,3 +41,6 @@ https://github.com/abhishekbanthia/Public-APIs
 https://www.programmableweb.com/category/all/apis
 
 http://apikatalogen.se/
+
+===GIPHY===
+https://github.com/Giphy/GiphyAPI
