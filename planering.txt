@@ -44,3 +44,25 @@ http://apikatalogen.se/
 
 ===GIPHY===
 https://github.com/Giphy/GiphyAPI
+
+**********************************************************************
+===TILLÄGG===
+Giphys Read Endoints:
+* Search
+* Trending
+* Translate
+* Random
+* Gif by id
+* Gifs by id
+* Stickers
+   - Search
+   - Trending
+   - Translate
+   - Random
+   
+   Write endpoint:
+   * Upload
+   
+Med målet att göra det lättare att hitta emojis till Slack behövs inte det mesta av det här. Alltså är det nödvändigt att utvidga målsättningen för att nå upp till kraven för uppgiften. Alternativen är att använda alla endpoints på giphys API eller att använda ett till API. 
+
+För ett extra API skulle Gfycat kunna fungera men detta har OAuth-auktorisering. Gfycat har också massor av funktionalitet som snabbt blir förvirrande. Att t.ex. skapa ett nytt konto eller få fram detaljer om användare är inte relevant för vad jag vill göra.

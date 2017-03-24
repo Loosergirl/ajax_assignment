@@ -6671,6 +6671,16 @@ Gr├Ñ & lavendel:
 #738290 & A1B5D8
 
 */
+.bottom-menu {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between; }
+
+.page-swap {
+  font-family: monospace;
+  font-size: 2rem;
+  color: #40e0d0; }
+
 html {
   height: 100%; }
 
