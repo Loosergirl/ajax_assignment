@@ -1,0 +1,17 @@
+@import 'bootstrap';
+@import 'nav';
+@import 'inputs';
+@import 'bottom-menu';
+@import 'preloader';
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    background-color: #333333;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #FFFFFF;
+}

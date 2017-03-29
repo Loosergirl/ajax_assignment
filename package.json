@@ -1,0 +1,33 @@
+{
+  "name": "ajax_assignment",
+  "version": "1.0.0",
+  "description": "Ajax assignment 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loosergirl/ajax_assignment.git"
+  },
+  "keywords": [
+    "ajax",
+    "gif",
+    "giphy"
+  ],
+  "author": "MK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Loosergirl/ajax_assignment/issues"
+  },
+  "homepage": "https://github.com/Loosergirl/ajax_assignment#readme",
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-qunit": "^1.3.0",
+    "grunt-contrib-uglify": "^2.2.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}

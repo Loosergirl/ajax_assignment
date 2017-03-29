@@ -63,6 +63,48 @@ Giphys Read Endoints:
    Write endpoint:
    * Upload
    
+Parameters:
+* q - search query term or phrase
+* limit - (optional) number of results to return, maximum 100. Default 25.
+* offset - (optional) results offset, defaults to 0.
+* rating - (optional) limit results to those rated (y,g, pg, pg-13 or r).
+* lang - (optional) specify default country for regional content; format is 2-letter ISO 639-1 country code. 
+* fmt - (optional) return results in html or json format (useful for viewing responses as GIFs to debug/test)
+
+Other/Data:
+* Source - data[i].source
+* Import datetime - data[i].import_datetime
+* Original gif - data[i].images.original.url
+* Larger fixed height (200px) - data[i].images.fixed_height.url
+* Small fixed height size - data[i].images.fixed_height_small.size
+
+   
 Med målet att göra det lättare att hitta emojis till Slack behövs inte det mesta av det här. Alltså är det nödvändigt att utvidga målsättningen för att nå upp till kraven för uppgiften. Alternativen är att använda alla endpoints på giphys API eller att använda ett till API. 
 
 För ett extra API skulle Gfycat kunna fungera men detta har OAuth-auktorisering. Gfycat har också massor av funktionalitet som snabbt blir förvirrande. Att t.ex. skapa ett nytt konto eller få fram detaljer om användare är inte relevant för vad jag vill göra.
+
+*******************************************************************
+===BOOTSTRAP===
+input group
+nav
+breadcrumbs
+pagination & pager
+alert for error messages
+progress bars?
+
+*****************************************************
+===ISSUES===
+preloader src?
+
+***************************************************************
+===TABS===
+* Trending (main)
+* Search Gif
+* Random Gif
+* Gif(s) by ID
+
+* Trending Sticker
+* Search Sticker
+* Random Sticker
+
+* Upload

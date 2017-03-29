@@ -5,35 +5,60 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ajax Assignment</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="dist/main.css">
 </head>
 
-<body>
+<body onload="trending.initTrending()">
+    <!--Navbar-->
     <nav>
         <a class="navbar-brand" href="#"><img class="logo" src="images/folder_icon.png" alt="logo"></a>
+        <div role="navigation">
+            <ul class="nav nav-pills">
+                <li role="presentation" class="active"><a href="#">Gifs</a></li>
+                <li role="presentation"><a href="views/stickers.html">Stickers</a></li>
+                <li role="presentation"><a href="views/upload.html">Upload</a></li>
+            </ul>
+        </div>
     </nav>
+    <!--/end navbar-->
+
+
 
     <!--Search-->
-    <input type="text" placeholder="Search" id="search">
-    <button id="submit">Search</button>
+    <div class="searchfield container">
+        <input type="text" placeholder="Search" id="search" class="search-input">
+        <button id="submit" class="btn btn-primary" onclick="search.searchQuery()">Search</button>
+    </div>
     <!--/end search-->
 
     <!--Div for appending-->
-    <div class="container">
+    <div class="container" id="container">
         <div class="row" id="result"></div>
+        <div class="row" id="result2"></div>
+        <div class="row" id="result3"></div>
+        <div class="row" id="result4"></div>
+        <div class="row" id="result5"></div>
+        <div class="row" id="result6"></div>
     </div>
 
 
     <!--Page swapping arrows-->
-    <div class="bottom-menu">
-        <div id="previous" class="page-swap">&#60;&#60;</div>
-        <div id="next" class="page-swap">&#62;&#62;</div>
+    <div class="container">
+        <div class="bottom-menu row">
+            <div id="previous" class="page-swap col-6">
+                <p>&#60;&#60;</p>
+                <h5>Previous</h5>
+            </div>
+            <div id="next" class="page-swap col-6">
+                <h5>Next</h5>
+                <p>&#62;&#62;</p>
+            </div>
+        </div>
     </div>
     <!--/end arrows-->
+
     <!--script links-->
     <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
-    <!--<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>-->
     <script src="js/main.js"></script>
 </body>
 

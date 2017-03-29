@@ -1,0 +1,31 @@
+input[type=text], input[type=url] {
+    font-size: 1.4rem;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 90%;
+    color: black;
+    @media(min-width: 500px) and (max-width: 790px) {
+        width: 65%
+    }
+    @media (min-width: 790px) {
+        width: 40%;
+    }
+}
+
+/*Only for actual search fields*/
+.search-input {
+    padding: 6px 0 6px 40px;
+    background-image: url('../images/search.png');
+    background-position: 10px 8px; 
+    background-repeat: no-repeat;
+}
+
+/*Input which are not search fields*/
+.not-search-input {
+    padding: 6px 0 6px 20px;
+}
+
+.searchfield {
+    margin-bottom: 1rem;
+    margin-top: 0.6rem;
+}
