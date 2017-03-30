@@ -5864,7 +5864,8 @@ input[type=text], input[type=url] {
 .page-swap {
   color: #40e0d0;
   display: flex;
-  flex-flow: row nowrap; }
+  flex-flow: row nowrap;
+  cursor: pointer; }
 
 .page-swap p {
   font-family: monospace;

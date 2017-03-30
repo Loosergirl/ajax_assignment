@@ -1,31 +1,5 @@
 /*===MAIN VARIABLES AND FUNCTIONS===*/
 var general = (function () {
-    /*Keeps track of the value of the offset. Default offset is 0*/
-    var offset = 0;
-
-    /*Get value of offset*/
-    var getOffset = () => {
-        return offset;
-    };
-
-    /*Set value of offset*/
-    var setOffset = (number) => {
-        offset = number;
-    };
-
-    /*Keeps track of the total search results*/
-    var totalResults = 0;
-
-    /*Get value of totalResults*/
-    var getTotalResults = () => {
-        return totalResults;
-    };
-
-    /*Set value of totalResults*/
-    var setTotalResults = (number) => {
-        totalResults = number;
-    };
-
     /*Replace blankspace with '+' in a string*/
     var searchStringReplacement = (str) => {
         for (let i = 0; i < str.length; i++) {
@@ -39,14 +13,17 @@ var general = (function () {
     /*Return value of search field with blankspaces converted to '+'*/
     var determineSearchTerms = () => {
         var terms = document.getElementById('search').value;
+        
+        /*Control*/
+        if (terms === '') {
+            console.log('No input was provided.')
+        }
+        
+        /*Function call to fix up the search string*/
         terms = searchStringReplacement(terms);
         return terms;
     };
 
-    /*Determines value of totalResults variable depending on the search response*/
-    var determineTotalResults = (response) => {
-        totalResults = response.pagination.total_count;
-    };
 
     /*Get and clear the container div with sub-divs where the gifs are to be appended*/
     var clearContainer = () => {
@@ -95,6 +72,23 @@ var general = (function () {
         }
     };
 
+    /*Public*/
+    return {
+        clearContainer: clearContainer,
+        embedAll: embedAll,
+        searchStringReplacement: searchStringReplacement,
+        determineSearchTerms: determineSearchTerms
+    };
+})();
+
+/*===FUNCTIONS FOR TRENDING ENDPOINT===*/
+var trending = (function () {
+    /*Keeps track of the value of the offset. Default offset is 0*/
+    var offset = 0;
+
+    /*Keeps track of the total search results*/
+    var totalResults = 0;
+
     /*Changes the offset to what it should be on the next page*/
     var nextOffset = () => {
         offset = offset + 36;
@@ -103,6 +97,11 @@ var general = (function () {
     /*Changes the offset to what it should be on the previous page*/
     var previousOffset = () => {
         offset = offset - 36;
+    };
+
+    /*Determines value of totalResults variable depending on the search response*/
+    var determineTotalResults = (response) => {
+        totalResults = response.pagination.total_count;
     };
 
     /*Control for offset; sets offset to 0 when it would be too large and maximizes it if too small*/
@@ -114,17 +113,8 @@ var general = (function () {
         }
     };
 
-    /*Determines what the offset string will be, to be used in the search query*/
-    var setOffsetString = () => {
-        var offsetString = '';
-        if (offset !== 0) {
-            offsetString = `&offset=${offset}`;
-        }
-        return offsetString;
-    };
-
     /*Swap to the next page. Requires in parameter with the appropriate function.*/
-    var nextPage = (relevantFunction) => {
+    var nextPage = () => {
         /*Change value of offset*/
         nextOffset();
 
@@ -132,16 +122,11 @@ var general = (function () {
         offsetControl();
 
         /*New gifs with the new offset*/
-        relevantFunction();
-    };
-
-    /*Add event listener for the next page arrows*/
-    var addNextPageEventListener = (relevantFunction) => {
-        document.getElementById('next').addEventListener('click', nextPage(relevantFunction));
+        getTrending();
     };
 
     /*Swap to the previous page. Requires in parameter with the appropriate function.*/
-    var previousPage = (relevantFunction) => {
+    var previousPage = () => {
         /*Change value of offset*/
         previousOffset();
 
@@ -149,32 +134,18 @@ var general = (function () {
         offsetControl();
 
         /*New gifs with the new offset*/
-        relevantFunction();
+        getTrending();
     };
 
-    /*Add event listener for the previous page arrows*/
-    var addPreviousPageEventListener = (relevantFunction) => {
-        document.getElementById('previous').addEventListener('click', previousPage(relevantFunction));
+    /*Determines what the offset string will be, to be used in the search query*/
+    var setOffsetString = () => {
+        var offsetString = '';
+        if (offset !== 0) {
+            offsetString = `offset=${offset}&`;
+        }
+        return offsetString;
     };
 
-    /*Public*/
-    return {
-        getOffset: getOffset,
-        setOffset: setOffset,
-        getTotalResults: getTotalResults,
-        setTotalResults: setTotalResults,
-        setOffsetString: setOffsetString,
-        addNextPageEventListener: addNextPageEventListener,
-        addPreviousPageEventListener: addPreviousPageEventListener,
-        clearContainer: clearContainer,
-        embedAll: embedAll,
-        searchStringReplacement: searchStringReplacement,
-        determineSearchTerms: determineSearchTerms
-    };
-})();
-
-/*===FUNCTIONS FOR TRENDING ENDPOINT===*/
-var trending = (function () {
     /*Because the file path is different, trending has its own function to show the preloader*/
     var showPreloader = () => {
         /*Call function which clears container div*/
@@ -190,65 +161,7 @@ var trending = (function () {
         /*Show preloader*/
         showPreloader();
 
-        /*Ajax with function calls inside*/
-        $.ajax({
-            method: 'GET',
-            url: 'http://api.giphy.com/v1/gifs/trending?limit=36&api_key=dc6zaTOxFJmzC',
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: (response) => {
-                general.clearContainer();
-                general.embedAll(response);
-                return response;
-            },
-            error: (error) => {
-                console.log(error);
-                general.clearContainer();
-                return error;
-            }
-        })
-    };
-
-    /*Add event listeners for page arrows*/
-    var addArrowEventListeners = () => {
-        general.addNextPageEventListener(getTrending);
-        general.addPreviousPageEventListener(getTrending);
-    };
-
-    /*This function is run on page load*/
-    var initTrending = () => {
-        addArrowEventListeners();
-        getTrending();
-    };
-
-    /*Public*/
-    return {
-        getTrending: getTrending,
-        addArrowEventListeners: addArrowEventListeners,
-        initTrending: initTrending
-    };
-})();
-
-/*===FUNCTIONS FOR SEARCH ENDPOINT*/
-var search = (function () {
-    /*Show loading gif*/
-    var showPreloader = () => {
-        /*Call function which clears container div*/
-        general.clearContainer();
-
-        /*Add new content*/
-        document.getElementById('result').innerHTML = `<img src="images/pre-loader.gif" alt="loading..." class="preloader">`;
-    };
-
-
-    /*Ajax request which uses search method of the API. Calls functions for embedding.*/
-    var searchQuery = () => {
-        /*Show preloader*/
-        showPreloader();
-        
-        /*Determine URL depending on search terms*/
-        var url = `http://api.giphy.com/v1/gifs/search?q=${general.determineSearchTerms()}&limit=36${general.setOffsetString()}&api_key=dc6zaTOxFJmzC`;
-
+        var url = `http://api.giphy.com/v1/gifs/trending?limit=36&${setOffsetString()}api_key=dc6zaTOxFJmzC`;
 
         /*Ajax with function calls inside*/
         $.ajax({
@@ -259,6 +172,7 @@ var search = (function () {
             success: (response) => {
                 general.clearContainer();
                 general.embedAll(response);
+                determineTotalResults(response);
                 return response;
             },
             error: (error) => {
@@ -269,21 +183,192 @@ var search = (function () {
         })
     };
 
-    /*Add event listeners for page arrows*/
-    var addArrowEventListeners = () => {
-        general.addNextPageEventListener(searchQuery);
-        general.addPreviousPageEventListener(searchQuery);
+
+    /*Public*/
+    return {
+        getTrending: getTrending,
+        nextPage: nextPage,
+        previousPage: previousPage
+    };
+})();
+
+/*===FUNCTIONS FOR SEARCH ENDPOINT*/
+var search = (function () {
+    /*Keeps track of the value of the offset. Default offset is 0*/
+    var offset = 0;
+
+    /*Keeps track of the total search results*/
+    var totalResults = 0;
+
+    /*Changes the offset to what it should be on the next page*/
+    var nextOffset = () => {
+        offset = offset + 36;
+    };
+
+    /*Changes the offset to what it should be on the previous page*/
+    var previousOffset = () => {
+        offset = offset - 36;
+    };
+
+    /*Determines value of totalResults variable depending on the search response*/
+    var determineTotalResults = (response) => {
+        totalResults = response.pagination.total_count;
+    };
+
+    /*Control for offset; sets offset to 0 when it would be too large and maximizes it if too small*/
+    var offsetControl = () => {
+        if (offset >= totalResults) {
+            offset = 0;
+        } else if (offset < 0) {
+            offset = totalResults - 36;
+        }
+    };
+
+    /*Swap to the next page. */
+    var nextPage = () => {
+        /*Change value of offset*/
+        nextOffset();
+
+        /*Control*/
+        offsetControl();
+
+        /*New gifs with the new offset*/
+        searchQuery();
+    };
+
+    /*Swap to the previous page. */
+    var previousPage = () => {
+        /*Change value of offset*/
+        previousOffset();
+
+        /*Control*/
+        offsetControl();
+
+        /*New gifs with the new offset*/
+        searchQuery();
+    };
+
+    /*Determines what the offset string will be, to be used in the search query*/
+    var setOffsetString = () => {
+        var offsetString = '';
+        if (offset !== 0) {
+            offsetString = `offset=${offset}&`;
+        }
+        return offsetString;
+    };
+
+    /*Show loading gif*/
+    var showPreloader = () => {
+        /*Call function which clears container div*/
+        general.clearContainer();
+
+        /*Add new content*/
+        document.getElementById('result').innerHTML = `<img src="../images/pre-loader.gif" alt="loading..." class="preloader">`;
+    };
+
+
+    /*Ajax request which uses search method of the API. Calls functions for embedding.*/
+    var searchQuery = () => {
+        /*Show preloader*/
+        showPreloader();
+
+        /*Determine URL depending on search terms*/
+        var url = `http://api.giphy.com/v1/gifs/search?q=${general.determineSearchTerms()}&limit=36&${setOffsetString()}api_key=dc6zaTOxFJmzC`;
+
+        /*Ajax with function calls inside*/
+        $.ajax({
+            method: 'GET',
+            url: url,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: (response) => {
+                general.clearContainer();
+                general.embedAll(response);
+                determineTotalResults(response);
+                return response;
+            },
+            error: (error) => {
+                console.log(error);
+                general.clearContainer();
+                return error;
+            }
+        })
     };
 
     /*Public*/
     return {
         searchQuery: searchQuery,
-        addArrowEventListeners: addArrowEventListeners
+        nextPage: nextPage,
+        previousPage: previousPage
     };
 })();
 
 /*===FUNCTIONS FOR TRENDING STICKERS ENDPOINT===*/
 var stickersTrending = (function () {
+    /*Keeps track of the value of the offset. Default offset is 0*/
+    var offset = 0;
+
+    /*Keeps track of the total search results*/
+    var totalResults = 0;
+
+    /*Changes the offset to what it should be on the next page*/
+    var nextOffset = () => {
+        offset = offset + 36;
+    };
+
+    /*Changes the offset to what it should be on the previous page*/
+    var previousOffset = () => {
+        offset = offset - 36;
+    };
+
+    /*Determines value of totalResults variable depending on the search response*/
+    var determineTotalResults = (response) => {
+        totalResults = response.pagination.total_count;
+    };
+
+    /*Control for offset; sets offset to 0 when it would be too large and maximizes it if too small*/
+    var offsetControl = () => {
+        if (offset >= totalResults) {
+            offset = 0;
+        } else if (offset < 0) {
+            offset = totalResults - 36;
+        }
+    };
+
+    /*Swap to the next page. */
+    var nextPage = () => {
+        /*Change value of offset*/
+        nextOffset();
+
+        /*Control*/
+        offsetControl();
+
+        /*New gifs with the new offset*/
+        getTrending();
+    };
+
+    /*Swap to the previous page. */
+    var previousPage = () => {
+        /*Change value of offset*/
+        previousOffset();
+
+        /*Control*/
+        offsetControl();
+
+        /*New gifs with the new offset*/
+        getTrending();
+    };
+
+    /*Determines what the offset string will be, to be used in the search query*/
+    var setOffsetString = () => {
+        var offsetString = '';
+        if (offset !== 0) {
+            offsetString = `offset=${offset}&`;
+        }
+        return offsetString;
+    };
+    
+    
     /*Show loading gif*/
     var showPreloader = () => {
         /*Call function which clears container div*/
@@ -298,16 +383,19 @@ var stickersTrending = (function () {
     var getTrending = () => {
         /*Show preloader*/
         showPreloader();
+        
+        var url = `http://api.giphy.com/v1/stickers/trending?limit=36&${setOffsetString()}api_key=dc6zaTOxFJmzC`
 
         /*Ajax with function calls inside*/
         $.ajax({
             method: 'GET',
-            url: 'http://api.giphy.com/v1/stickers/trending?limit=36&api_key=dc6zaTOxFJmzC',
+            url: url,
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: (response) => {
                 general.clearContainer();
                 general.embedAll(response);
+                determineTotalResults(response);
                 return response;
             },
             error: (error) => {
@@ -318,28 +406,79 @@ var stickersTrending = (function () {
         })
     };
 
-    /*Add event listeners for page arrows*/
-    var addArrowEventListeners = () => {
-        general.addNextPageEventListener(getTrending);
-        general.addPreviousPageEventListener(getTrending);
-    };
-
-    /*This function is run on page load*/
-    var initTrending = () => {
-        addArrowEventListeners();
-        getTrending();
-    };
-
     /*Public*/
     return {
         getTrending: getTrending,
-        addArrowEventListeners: addArrowEventListeners,
-        initTrending: initTrending
+        previousPage: previousPage,
+        nextPage: nextPage
     };
 })();
 
 /*===FUNCTIONS FOR STICKERS SEARCH ENDPOINT*/
 var stickersSearch = (function () {
+        /*Keeps track of the value of the offset. Default offset is 0*/
+    var offset = 0;
+
+    /*Keeps track of the total search results*/
+    var totalResults = 0;
+
+    /*Changes the offset to what it should be on the next page*/
+    var nextOffset = () => {
+        offset = offset + 36;
+    };
+
+    /*Changes the offset to what it should be on the previous page*/
+    var previousOffset = () => {
+        offset = offset - 36;
+    };
+
+    /*Determines value of totalResults variable depending on the search response*/
+    var determineTotalResults = (response) => {
+        totalResults = response.pagination.total_count;
+    };
+
+    /*Control for offset; sets offset to 0 when it would be too large and maximizes it if too small*/
+    var offsetControl = () => {
+        if (offset >= totalResults) {
+            offset = 0;
+        } else if (offset < 0) {
+            offset = totalResults - 36;
+        }
+    };
+
+    /*Swap to the next page. */
+    var nextPage = () => {
+        /*Change value of offset*/
+        nextOffset();
+
+        /*Control*/
+        offsetControl();
+
+        /*New gifs with the new offset*/
+        searchQuery();
+    };
+
+    /*Swap to the previous page. */
+    var previousPage = () => {
+        /*Change value of offset*/
+        previousOffset();
+
+        /*Control*/
+        offsetControl();
+
+        /*New gifs with the new offset*/
+        searchQuery();
+    };
+
+    /*Determines what the offset string will be, to be used in the search query*/
+    var setOffsetString = () => {
+        var offsetString = '';
+        if (offset !== 0) {
+            offsetString = `offset=${offset}&`;
+        }
+        return offsetString;
+    };
+    
     /*Show loading gif*/
     var showPreloader = () => {
         /*Call function which clears container div*/
@@ -356,7 +495,7 @@ var stickersSearch = (function () {
         showPreloader();
 
         /*Determine URL depending on search terms*/
-        var url = `http://api.giphy.com/v1/stickers/search?q=${general.determineSearchTerms()}&limit=36${general.setOffsetString()}&api_key=dc6zaTOxFJmzC`;
+        var url = `http://api.giphy.com/v1/stickers/search?q=${general.determineSearchTerms()}&limit=36&${setOffsetString()}api_key=dc6zaTOxFJmzC`;
 
 
         /*Ajax with function calls inside*/
@@ -368,6 +507,7 @@ var stickersSearch = (function () {
             success: (response) => {
                 general.clearContainer();
                 general.embedAll(response);
+                determineTotalResults(response);
                 return response;
             },
             error: (error) => {
@@ -378,16 +518,11 @@ var stickersSearch = (function () {
         })
     };
 
-    /*Add event listeners for page arrows*/
-    var addArrowEventListeners = () => {
-        general.addNextPageEventListener(searchQuery);
-        general.addPreviousPageEventListener(searchQuery);
-    };
-
     /*Public*/
     return {
         searchQuery: searchQuery,
-        addArrowEventListeners: addArrowEventListeners
+        nextPage: nextPage,
+        previousPage: previousPage
     };
 })();
 
