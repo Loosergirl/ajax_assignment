@@ -2,57 +2,57 @@
 <html lang="en-US">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ajax Assignment</title>
-    <link rel="stylesheet" href="../dist/main.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Ajax Assignment</title>
+	<link rel="stylesheet" href="../dist/main.css">
 </head>
 
 <body onload="stickersTrending.getTrending()">
-    <!--Navbar-->
-    <nav>
-        <a class="navbar-brand" href="#"><img class="logo" src="../images/folder_icon.png" alt="logo"></a>
+	<!--Navbar-->
+	<nav>
+		<a class="navbar-brand" href="#"><img class="logo" src="../images/folder_icon.png" alt="logo"></a>
 
-        <div role="navigation">
-            <ul class="nav nav-pills">
-                <li role="presentation"><a href="../index.html">Trending</a></li>
-                <li role="presentation"><a href="gif-search.html">Search</a></li>
-                <li role="presentation" class="active"><a href="#">Trending stickers</a></li>
-                <li role="presentation"><a href="stickers-search.html">Search stickers</a></li>
-                <li role="presentation"><a href="upload.html">Upload</a></li>
-            </ul>
-        </div>
-    </nav>
-    <!--/end navbar-->
+		<div role="navigation">
+			<ul class="nav nav-pills">
+				<li role="presentation"><a href="../index.html">Trending</a></li>
+				<li role="presentation"><a href="gif-search.html">Search</a></li>
+				<li role="presentation" class="active"><a href="#">Trending stickers</a></li>
+				<li role="presentation"><a href="stickers-search.html">Search stickers</a></li>
+				<li role="presentation"><a href="upload.html">Upload</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!--/end navbar-->
 
-    <!--Div for appending-->
-    <div class="container" id="container">
-        <div class="row" id="result"></div>
-        <div class="row" id="result2"></div>
-        <div class="row" id="result3"></div>
-        <div class="row" id="result4"></div>
-        <div class="row" id="result5"></div>
-        <div class="row" id="result6"></div>
-    </div>
+	<!--Div for appending-->
+	<div class="container add-top-margin" id="container">
+		<div class="row" id="result"></div>
+		<div class="row" id="result2"></div>
+		<div class="row" id="result3"></div>
+		<div class="row" id="result4"></div>
+		<div class="row" id="result5"></div>
+		<div class="row" id="result6"></div>
+	</div>
 
 
-    <!--Page swapping arrows-->
-    <div class="container">
-        <div class="bottom-menu row">
-            <div id="previous" class="page-swap col-6" onclick="stickersTrending.previousPage()">
-                <p>&#60;&#60;</p>
-                <h5>Previous</h5>
-            </div>
-            <div id="next" class="page-swap col-6" onclick="stickersTrending.nextPage()">
-                <h5>Next</h5>
-                <p>&#62;&#62;</p>
-            </div>
-        </div>
-    </div>
-    <!--/end arrows-->
-    <!--script links-->
-    <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
-    <script src="../js/main.js"></script>
+	<!--Page swapping arrows-->
+	<div class="container">
+		<div class="bottom-menu row">
+			<div id="previous" class="page-swap col-6" onclick="stickersTrending.previousPage()">
+				<p>&#60;&#60;</p>
+				<h5>Previous</h5>
+			</div>
+			<div id="next" class="page-swap col-6" onclick="stickersTrending.nextPage()">
+				<h5>Next</h5>
+				<p>&#62;&#62;</p>
+			</div>
+		</div>
+	</div>
+	<!--/end arrows-->
+	<!--script links-->
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
+	<script src="../js/main.js"></script>
 </body>
 
 </html>

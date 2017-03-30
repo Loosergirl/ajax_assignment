@@ -5876,6 +5876,9 @@ input[type=text], input[type=url] {
   display: block;
   margin: 0 auto; }
 
+.add-top-margin {
+  margin-top: 2rem; }
+
 html {
   height: 100%; }
 
