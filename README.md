@@ -4,6 +4,9 @@ Maria Kilsved, JavaScript 2, fend16
 #### Live project
 https://loosergirl.github.io/ajax_assignment/
 
+#### GitHub
+https://github.com/Loosergirl/ajax_assignment
+
 #### Purpose of project
 To make it possible to quickly find gifs suitable as Slack emojis. For this reason, gifs are displayed as small as possible. In order to counteract slow browsing, only a limited amount of gifs are shown at a time. All other functionality of this project only has the purpose of fulfilling the demands of this assignment.
 
