@@ -24,6 +24,8 @@ https://github.com/Giphy/GiphyAPI
 My work process has plenty of room for improvement. The issue being, I misjudged the time it would take to complete the assignment and ended up doing most of the work near the end. This was not due to bad planning; rather, I didn't follow the plan.
 
 #### Remaining issues
+Giphy apparently doesn't have a secure connection and GitHub refuses to connect to the API. If the website is stored locally this is not a problem.
+
 Does this API really use JSON? `JSON.parse()` doesn't work and appears unnecessary. 
 
 I wanted to use the 'random' endpoint of the API. This proved impossible due to an error:
