@@ -83,7 +83,7 @@ Med målet att göra det lättare att hitta emojis till Slack behövs inte det m
 
 För ett extra API skulle Gfycat kunna fungera men detta har OAuth-auktorisering. Gfycat har också massor av funktionalitet som snabbt blir förvirrande. Att t.ex. skapa ett nytt konto eller få fram detaljer om användare är inte relevant för vad jag vill göra.
 
-*******************************************************************
+**************************************************************
 ===BOOTSTRAP===
 input group
 nav
@@ -93,10 +93,7 @@ alert for error messages
 progress bars?
 
 *****************************************************
-===ISSUES===
-preloader src?
 
-***************************************************************
 ===TABS===
 * Trending (main)
 * Search Gif

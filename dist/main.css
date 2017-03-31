@@ -5879,6 +5879,13 @@ input[type=text], input[type=url] {
 .add-top-margin {
   margin-top: 2rem; }
 
+.turquoise-text {
+  color: #40e0d0; }
+
+.small-embed {
+  height: 100px;
+  width: auto; }
+
 html {
   height: 100%; }
 

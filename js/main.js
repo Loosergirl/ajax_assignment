@@ -13,12 +13,12 @@ var general = (function () {
     /*Return value of search field with blankspaces converted to '+'*/
     var determineSearchTerms = () => {
         var terms = document.getElementById('search').value;
-        
+
         /*Control*/
         if (terms === '') {
             console.log('No input was provided.')
         }
-        
+
         /*Function call to fix up the search string*/
         terms = searchStringReplacement(terms);
         return terms;
@@ -367,8 +367,8 @@ var stickersTrending = (function () {
         }
         return offsetString;
     };
-    
-    
+
+
     /*Show loading gif*/
     var showPreloader = () => {
         /*Call function which clears container div*/
@@ -383,8 +383,8 @@ var stickersTrending = (function () {
     var getTrending = () => {
         /*Show preloader*/
         showPreloader();
-        
-        var url = `http://api.giphy.com/v1/stickers/trending?limit=36&${setOffsetString()}api_key=dc6zaTOxFJmzC`
+
+        var url = `http://api.giphy.com/v1/stickers/trending?limit=36&${setOffsetString()}api_key=dc6zaTOxFJmzC`;
 
         /*Ajax with function calls inside*/
         $.ajax({
@@ -416,7 +416,7 @@ var stickersTrending = (function () {
 
 /*===FUNCTIONS FOR STICKERS SEARCH ENDPOINT*/
 var stickersSearch = (function () {
-        /*Keeps track of the value of the offset. Default offset is 0*/
+    /*Keeps track of the value of the offset. Default offset is 0*/
     var offset = 0;
 
     /*Keeps track of the total search results*/
@@ -478,7 +478,7 @@ var stickersSearch = (function () {
         }
         return offsetString;
     };
-    
+
     /*Show loading gif*/
     var showPreloader = () => {
         /*Call function which clears container div*/
@@ -528,6 +528,9 @@ var stickersSearch = (function () {
 
 /*===FUNCTIONS FOR UPLOAD ENDPOINT*/
 var upload = (function () {
+    /*Saves id*/
+    var uploadedID = '';
+
     /*Another version of the preloader function*/
     var showPreloader = () => {
         /*Obtain div*/
@@ -561,8 +564,11 @@ var upload = (function () {
             },
             success: (response) => {
                 console.log(response);
-                console.log('Uploaded')
-                document.getElementById('result').innerHTML = `Uploaded! ID: ${obtainID(response)}`;
+                console.log('Uploaded');
+                uploadedID = obtainID(response);
+                document.getElementById('result').innerHTML = `Uploaded! ID: ${uploadedID}`;
+                document.getElementById('id-btn').disabled = false;
+
             },
             error: (error) => {
                 console.log(error);
@@ -588,8 +594,11 @@ var upload = (function () {
             },
             success: (response) => {
                 console.log(response);
-                console.log('Uploaded')
-                document.getElementById('result').innerHTML = `Uploaded! ID: ${obtainID(response)}`;
+                console.log('Uploaded');
+                uploadedID = obtainID(response);
+                document.getElementById('result').innerHTML = `Uploaded! ID: ${uploadedID}`;
+                document.getElementById('id-btn').disabled = false;
+
             },
             error: (error) => {
                 console.log(error);
@@ -615,7 +624,37 @@ var upload = (function () {
         }
     };
 
+
+    var gifByID = () => {
+        /*Show preloader*/
+        showPreloader();
+
+        /*Determine URL depending on search terms*/
+        var url = `http://api.giphy.com/v1/gifs/${uploadedID}?api_key=dc6zaTOxFJmzC`;
+
+        /*Ajax with function calls inside*/
+        $.ajax({
+            method: 'GET',
+            url: url,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: (response) => {
+                var result = document.getElementById('result');
+                result.innerHTML = '';
+                result.innerHTML = `<a href="${response.data.embed_url}">${response.data.embed_url}</a>`;
+                console.log(response);
+                return response;
+            },
+            error: (error) => {
+                console.log(error);
+                document.getElementById('result').innerHTML = '';
+                return error;
+            }
+        })
+    };
+
     return {
-        obtainSource: obtainSource
+        obtainSource: obtainSource,
+        gifByID: gifByID
     };
 })();
