@@ -24,9 +24,9 @@ https://github.com/Giphy/GiphyAPI
 My work process has plenty of room for improvement. The issue being, I misjudged the time it would take to complete the assignment and ended up doing most of the work near the end. This was not due to bad planning; rather, I didn't follow the plan.
 
 #### Remaining issues
-The largest issue is, does this API really use JSON? `JSON.parse()` doesn't work and appears unnecessary. 
-
-The website could also use more functionality. This is due to me not putting in enough effort. However, the upside is the project has already fulfilled its purpose.
+Does this API really use JSON? `JSON.parse()` doesn't work and appears unnecessary. 
 
 I wanted to use the 'random' endpoint of the API. This proved impossible due to an error:
 >Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested source.
+
+Later, I also wanted to use the gif by ID endpoint to show any uploaded gif. However, the gifs won't appear despite the correct code. Formatting the size of the image works, which becomes apparent as the container around it changes size, but the gif itself won't load. Using an iframe, as suggested by giphy, didn't work either.  I have tried changing the http:// into https:// but that didn't work either. Eventually I put in a link to the image instead, which apparently works.
